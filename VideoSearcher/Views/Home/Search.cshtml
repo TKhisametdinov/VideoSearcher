@@ -1,0 +1,234 @@
+﻿@using VideoSearcher.Shared;
+@model SearchMovieResults
+
+@if (!Model.Results.Any())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Sorry, couldn't find movies by your request</h4>
+        </div>
+    </div>
+}
+else
+{
+    foreach (var searchMovieResult in Model.Results)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="videoIframe shadow">
+                        @if (searchMovieResult.TrailerInfo != null)
+                    {
+                            <img id="videoStart" class="slate_button" data-youtubeUrl="@searchMovieResult.TrailerInfo.Url" />
+                            if (searchMovieResult.TrailerInfo.Thumbnails.Maxres != null)
+                            {
+                                <img src="@searchMovieResult.TrailerInfo.Thumbnails.Maxres.Url"
+                                     height="@searchMovieResult.TrailerInfo.Thumbnails.Maxres.Height"
+                                     width="@searchMovieResult.TrailerInfo.Thumbnails.Maxres.Width" />
+                            }
+                            else if (searchMovieResult.TrailerInfo.Thumbnails.High != null)
+                            {
+                                <img src="@searchMovieResult.TrailerInfo.Thumbnails.High.Url"
+                                     height="@searchMovieResult.TrailerInfo.Thumbnails.High.Height"
+                                     width="@searchMovieResult.TrailerInfo.Thumbnails.High.Width" />
+                            }
+                            else if (searchMovieResult.TrailerInfo.Thumbnails.Standard != null)
+                            {
+                                <img src="@searchMovieResult.TrailerInfo.Thumbnails.Standard.Url"
+                                     height="@searchMovieResult.TrailerInfo.Thumbnails.Standard.Height"
+                                     width="@searchMovieResult.TrailerInfo.Thumbnails.Standard.Width" />
+                            }
+                            else if (searchMovieResult.TrailerInfo.Thumbnails.Medium != null)
+                            {
+                                <img src="@searchMovieResult.TrailerInfo.Thumbnails.Medium.Url"
+                                     height="@searchMovieResult.TrailerInfo.Thumbnails.Medium.Height"
+                                     width="@searchMovieResult.TrailerInfo.Thumbnails.Medium.Width" />
+                            }
+                            else if (searchMovieResult.TrailerInfo.Thumbnails.Default != null)
+                            {
+                                <img src="@searchMovieResult.TrailerInfo.Thumbnails.Default.Url"
+                                     height="@searchMovieResult.TrailerInfo.Thumbnails.Default.Height"
+                                     width="@searchMovieResult.TrailerInfo.Thumbnails.Default.Width" />
+                            }
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/YouTube-Slash-Thru-Play-Icon.jpg")"
+                                 height="298"
+                                 width="480" />
+                        }
+                    </div>
+                </div>
+                @if (searchMovieResult.TrailerInfo != null)
+                {
+                    <div class="row">
+                        <ul class="list-inline">
+                            <li>
+                                <a target="_blank" href="https://facebook.com/sharer.php?u=https://www.youtube.com/watch?v=@(searchMovieResult.TrailerInfo.Url)" class="social facebook"></a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.youtube.com/watch?v=@(searchMovieResult.TrailerInfo.Url)&amp;title=@(searchMovieResult.TrailerInfo.Title)" class="social linkedin"></a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://twitter.com/intent/tweet?url=https://www.youtube.com/watch?v=@(searchMovieResult.TrailerInfo.Url)&amp;text=@(searchMovieResult.TrailerInfo.Title)" class="social twitter"></a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://plus.google.com/share?url=https://www.youtube.com/watch?v=@(searchMovieResult.TrailerInfo.Url)" class="social googleplus"></a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Title</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Title
+                        </div>
+                    </div>
+                </div>
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Year</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Year
+                        </div>
+                    </div>
+                </div>
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Actors</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Actors
+                        </div>
+                    </div>
+                </div>
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Country</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Country
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Director</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Director
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Genre</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Genre
+                        </div>
+                    </div>
+                </div>
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Imdb Rating</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.ImdbRating
+                        </div>
+                    </div>
+                </div>
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Imdb Votes</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.ImdbVotes
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Language</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Language
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Writer</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Writer
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Runtime</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Runtime
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row description">
+                    <div class="col-md-2">
+                        <div class="headers">Plot</div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="headerValue">
+                            @searchMovieResult.MovieFullInfo.Plot
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#prev" aria-label="Previous" onclick="getVideosForPrevPage();">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.TotalResults / 10 + 1; i++)
+            {
+                <li class="@(i == Model.CurrentPage ? "active" : "")"><a href="#@i" onclick="getVideosForPage(@i)">@i</a></li>
+            }
+            <li>
+                <a href="#next" aria-label="Next" onclick="getVideosForNextPage(@(Model.TotalResults / 10 + 1))">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}

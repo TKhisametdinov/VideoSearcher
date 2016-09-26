@@ -1,0 +1,9 @@
+packages/
+VideoSearcher.Api/bin/
+VideoSearcher.Api/obj/
+VideoSearcher.Shared/bin/
+VideoSearcher.Shared/obj/
+VideoSearcher.SharedUtils/bin/
+VideoSearcher.SharedUtils/obj/
+VideoSearcher/bin/
+VideoSearcher/obj/
